@@ -15,7 +15,7 @@ class BpdParse
         $reports = $this->findReports($this->text);
         foreach ($reports as $report) {
             $this->processedReports[] = new Report($report);
-            echo '';
+            echo '.';
         }
     }
 
