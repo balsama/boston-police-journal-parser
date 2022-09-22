@@ -54,7 +54,7 @@ try {
     // You should name it uniquely.
     // DO NOT USE $_FILES['upfile']['name'] WITHOUT ANY VALIDATION !!
     // On this example, obtain safe unique name from its binary data.
-    $name = sprintf(sys_get_temp_dir() . '%s.%s', sha1_file($_FILES['upfile']['tmp_name']), $ext);
+    $name = sprintf(sys_get_temp_dir() . '/%s.%s', sha1_file($_FILES['upfile']['tmp_name']), $ext);
     if (!move_uploaded_file(
         $_FILES['upfile']['tmp_name'],
         $name
