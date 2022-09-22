@@ -1,0 +1,19 @@
+{
+    "name": "balsama/boston-police-report-parser",
+    "description": "Parses data from Boston Police Public Journal PDFs.",
+    "type": "project",
+    "require": {
+        "smalot/pdfparser": "dev-master"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "10.0.x-dev"
+    },
+    "license": "gpl-2.0-or-later",
+    "autoload": {
+        "psr-4": {
+            "Balsama\\BostonPoliceReportParser\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
