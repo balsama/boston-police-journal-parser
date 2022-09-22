@@ -14,8 +14,7 @@ class Report
     public string $reportDateTime;
     public string $occuranceDateTime;
     public string $officer;
-    public string $address;
-    public string $neighborhood;
+    public string $location;
 
     public function __construct($reportText)
     {
@@ -44,53 +43,7 @@ class Report
         $location = $this->get_string_between($reportText, 'Location of Occurrence', 'Nature of Incident');
         $location = trim(str_replace('Boston Police Department', '', $location));
         $location = str_replace(PHP_EOL, ' ', $location);
-        $latLong = $this->lookupLatLong($location);
-        if ($latLong) {
-            $this->getNeighborhood($latLong);
-        }
-    }
-
-    private function getNeighborhood(array $latLong)
-    {
-        $url = 'https://boston-neighborhood-finder.herokuapp.com/';
-        $form_params = [
-            'form_params' => [
-                'lat' => $latLong[1],
-                'long' => $latLong[0],
-            ]
-        ];
-        $client = new Client();
-        try {
-            $response = $client->request('POST', $url, $form_params);
-        }
-        catch (ClientException $e) {
-            return 'Unknown neighborhood';
-        }
-        return $this->neighborhood = json_decode($response->getBody())->neighborhood;
-    }
-
-    private function lookupLatLong($address)
-    {
-        $mapboxkey = getenv('mapbox');
-        if (!$mapboxkey) {
-            if (file_exists(__DIR__ . '/../config.yml')) {
-                $config = file_get_contents(__DIR__ . '/../config.yml');
-                $mapboxkey = str_replace('mapbox: ', '', $config);
-            }
-        }
-        $url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/' . $address . '.json?access_token=' . $mapboxkey;
-        $response = Fetch::fetch($url);
-        foreach ($response->features as $location) {
-            if (property_exists($location, 'context')) {
-                foreach ($location->context as $context) {
-                    if ($context->text === 'Massachusetts') {
-                        $this->address = $location->place_name;
-                        return $location->center;
-                    }
-                }
-            }
-
-        }
+        $this->location = $location;
     }
 
     private function isValidComplaintNumber($complaintNumber): bool
