@@ -16,6 +16,7 @@ class BpdParse
         foreach ($reports as $report) {
             $this->processedReports[] = new Report($report);
         }
+        $foo = 21;
     }
 
     public function __toString(): string{
