@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a3bb27aa4972ebd203318386763078ba",
+    "content-hash": "6bec2ab9c673b6d86a46c1ac712c50e3",
     "packages": [
         {
             "name": "balsama/fetch",
@@ -1347,12 +1347,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "76bbb367dffdf3fdc8c86abc8e1ae8f1b624bc40"
+                "reference": "bf81428f812918c00da7fe97d7e4fe188d39093b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/76bbb367dffdf3fdc8c86abc8e1ae8f1b624bc40",
-                "reference": "76bbb367dffdf3fdc8c86abc8e1ae8f1b624bc40",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/bf81428f812918c00da7fe97d7e4fe188d39093b",
+                "reference": "bf81428f812918c00da7fe97d7e4fe188d39093b",
                 "shasum": ""
             },
             "require": {
@@ -1439,7 +1439,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-09-19T15:48:16+00:00"
+            "time": "2022-09-23T15:16:10+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -2423,7 +2423,9 @@
     },
     "prefer-stable": true,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "ext-ctype": "*"
+    },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
