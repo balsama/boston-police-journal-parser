@@ -2,10 +2,6 @@
 
 namespace Balsama\BostonPoliceReportParser;
 
-use Balsama\Fetch;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ClientException;
-
 class Report
 {
     private array $parts;
@@ -21,6 +17,12 @@ class Report
         $this->parts = explode(PHP_EOL, $reportText);
         $this->findFirstRow();
         $this->findLocation($reportText);
+        $this->findIncidentType($reportText);
+    }
+
+    private function findIncidentType(string $reportText): void
+    {
+
     }
 
     private function findFirstRow(): void
@@ -28,8 +30,20 @@ class Report
         if ($this->isValidComplaintNumber((string) trim($this->parts[6]))) {
             $indexes = [5, 6, 7, 8];
         }
-        elseif ($this->isValidComplaintNumber((string) trim($this->parts[10]))) {
-            $indexes = [9, 10, 11, 12];
+        elseif (array_key_exists(11, $this->parts)) {
+            if ($this->isValidComplaintNumber((string)trim($this->parts[11]))) {
+                // @see tests/pdfs/exampleReport3
+                $indexes = [10, 11, 12, 13];
+            }
+            else {
+                return;
+            }
+        }
+        else {
+            return;
+        }
+        if (!isset($indexes)) {
+            $foo = 21;
         }
 
         $this->complaintNumber = (string) trim($this->parts[$indexes[1]]);

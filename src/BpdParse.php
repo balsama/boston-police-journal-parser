@@ -2,6 +2,8 @@
 
 namespace Balsama\BostonPoliceReportParser;
 
+use function PHPUnit\Framework\stringContains;
+
 class BpdParse
 {
     public string $text;
@@ -36,10 +38,10 @@ class BpdParse
         return $reports;
     }
 
-    private function stripPageBreaks($text): string
+    public function stripPageBreaks($text): string
     {
-        $parts = explode('Boston Police Department', $text);
-        // @todo: Remove the switch in assign first line.
+        $pattern = "/[0-9]{1,2}\/[0-9]{2}\/[0-9]{4} [0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2} [AaPp][Mm].*Boston Police Department\n/s";
+        $text = preg_replace($pattern, '', $text);
         return $text;
     }
 

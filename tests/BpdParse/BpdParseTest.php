@@ -48,4 +48,12 @@ class BpdParseTest extends \PHPUnit\Framework\TestCase
         $this->assertCount(192, $reports);
     }
 
+    public function testStripPageBreaks()
+    {
+        $exampleReportText = file_get_contents( __DIR__ . '/../pdfs/exampleReport2');
+        $this->assertStringContainsString('Boston Police Department', $exampleReportText);
+        $modifiedExampleReportText = $this->bpdParse->stripPageBreaks($exampleReportText);
+        $this->assertStringNotContainsString('Boston Police Department', $modifiedExampleReportText);
+    }
+
 }
