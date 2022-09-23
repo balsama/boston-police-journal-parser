@@ -28,4 +28,14 @@ class ReportTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('5 DUVAL ST', $report->location);
     }
 
+    public function testReportWithMultipleArrests()
+    {
+        $exampleReportText = file_get_contents( __DIR__ . '/../pdfs/exampleReport4');
+        $report = new Report($exampleReportText);
+        $this->assertCount(3, $report->arrestees);
+        foreach ($report->arrestees as $arrestee) {
+            $this->assertInstanceOf('Balsama\BostonPoliceReportParser\Arrestee', $arrestee);
+        }
+    }
+
 }

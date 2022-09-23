@@ -9,20 +9,63 @@ class Report
     public string $complaintNumber;
     public string $reportDateTime;
     public string $occuranceDateTime;
-    public string $officer;
+    public Officer $officer;
+    public string $officerEmployeeNumber;
     public string $location;
+    public Incident $incident;
+    public array $arrestees;
+
+    const UNKNOWN = 'unknown';
 
     public function __construct($reportText)
     {
         $this->parts = explode(PHP_EOL, $reportText);
         $this->findFirstRow();
         $this->findLocation($reportText);
-        $this->findIncidentType($reportText);
+        $this->findIncidentType();
+        $this->findArrestees($reportText);
     }
 
-    private function findIncidentType(string $reportText): void
+    private function findArrestees(string $reportText)
     {
+        $this->arrestees = [];
+        foreach ($this->parts as $index => $part) {
+            if ($part === 'Arrests') {
+                $arrestsStartingIndex = $index;
+                continue;
+            }
+        }
 
+        if (!isset($arrestsStartingIndex)) {
+            return;
+        }
+
+        $arresteesParts = array_slice($this->parts, $arrestsStartingIndex + 2);
+        $arresteesParts = array_filter($arresteesParts, function($item) {
+            if (ctype_space($item) || empty($item)) {
+                return false;
+            }
+            return true;
+        });
+        $arresteesArrays = array_chunk($arresteesParts, 3);
+
+        foreach ($arresteesArrays as $arresteeArray) {
+            $this->arrestees[] = new Arrestee($arresteeArray);
+        }
+    }
+
+    private function findIncidentType(): void
+    {
+        $incidentTypeFullText = self::UNKNOWN;
+        foreach ($this->parts as $index => $part) {
+            if ($part === 'Nature of Incident') {
+                $incidentIndex = $index + 2;
+                $incidentTypeFullText = (string) trim($this->parts[$incidentIndex]);
+                continue;
+            }
+        }
+
+        $this->incident = new Incident($incidentTypeFullText);
     }
 
     private function findFirstRow(): void
@@ -46,7 +89,7 @@ class Report
         $this->complaintNumber = (string) trim($this->parts[$indexes[1]]);
         $this->reportDateTime = date("Y-m-d H:i:s", strtotime((string) trim($this->parts[$indexes[0]])));
         $this->occuranceDateTime = date("Y-m-d H:i:s", strtotime((string) trim($this->parts[$indexes[2]])));
-        $this->officer = (string) trim($this->parts[$indexes[3]]);
+        $this->officer = new Officer((string) trim($this->parts[$indexes[3]]) ?: self::UNKNOWN);
     }
 
     private function findLocation(string $reportText): void
