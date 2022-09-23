@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Boston Police Journal Parser | About</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+</head>
+<body>
+
+<header class="p-3 text-bg-dark">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="url-form.html" class="nav-link px-2 text-white">Parse from URL</a></li>
+                <li><a href="upload-form.html" class="nav-link px-2 text-white">Parse from file upload</a></li>
+                <li><a href="index.html" class="nav-link px-2 text-secondary">About</a></li>
+            </ul>
+
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <main>
+        <div class="py-5">
+            <h1>Boston Police Journal Parser</h1>
+            <p class="lead">This website takes the PDF journals that the Boston Police Department provides and parses them into structured JSON for consumption.</p>
+            <p>The Boston Police Department releases Public Journals (also called District Journals) regularly on its blog <a href="https://bpdnews.com/">bpdnews.com</a> in PDF format. But these PDFs are useless if you want to process or ingest the data. This service converts the PDFs into usable JSON.</p>
+            <div class="d-grid gap-2 d-sm-flex">
+                <a href="url-form.html" type="button" class="btn btn-primary btn-lg px-4 gap-3">Try it out</a>
+            </div>
+            <hr class="my-4">
+            <h2>Usage</h2>
+            <h3>Forms</h3>
+            <p>You can use one of the forms to <a href="upload-form.html">upload a PDF</a> or <a href="url-form.html">enter the URL</a> of a PDF for processing.</p>
+            <h3>API</h3>
+            <p>Alternatively, you can POST the URL of a valid PDF file as <code>urlfile</code> to <code>https://boston-police-journal-parser.herokuapp.com/process-url.php</code>.</p>
+        </div>
+    </main>
+</div>
+<div class="container">
+    <footer class="py-3 my-4">
+        <p class="text-center text-muted">
+            This service is tightly coupled to the specific PDF format in which the BPD provides the journal. It will not work with other PDFs or other files.<br>See an Example
+            <a href="https://boston-police-journal-parser.herokuapp.com/tests/pdfs/district_journal_arrests_public.pdf">
+                Boston Police Department Public Journal
+            </a>.
+        </p>
+        <p class="text-center text-muted">This code is hosted on <a href="https://github.com/balsama/boston-police-journal-parser">GitHub</a>. Please report any issues in the <a href="https://github.com/balsama/boston-police-journal-parser/issues">GitHub Issue Queue</a>.</p>
+    </footer>
+</div>
+</body>
+</html>

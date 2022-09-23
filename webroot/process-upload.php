@@ -7,7 +7,6 @@ use Balsama\BostonPoliceReportParser\BpdParse;
 header('Content-Type: text/plain; charset=utf-8');
 
 try {
-
     // Undefined | Multiple Files | $_FILES Corruption Attack
     // If this request falls under any of them, treat it invalid.
     if (
@@ -63,10 +62,9 @@ try {
     }
 
 } catch (RuntimeException $e) {
-
     echo $e->getMessage();
-
 }
 
 $bpdParse = new BpdParse($name);
 echo (string) $bpdParse;
+exit(0);

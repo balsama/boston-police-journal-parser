@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Boston Police Journal Parser | Parse from file upload</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+</head>
+<body>
+
+<header class="p-3 text-bg-dark">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="url-form.html" class="nav-link px-2 text-white">Parse from URL</a></li>
+                <li><a href="upload-form.html" class="nav-link px-2 text-secondary">Parse from file upload</a></li>
+                <li><a href="index.html" class="nav-link px-2 text-white">About</a></li>
+            </ul>
+
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <main>
+        <div class="py-5">
+            <h1>Boston Police Journal Parser</h1>
+            <p class="lead">Upload a BPD journal in PDF format for parsing.</p>
+        </div>
+
+        <div class="row g-5">
+            <form method="post" enctype="multipart/form-data" action="process-upload.php">
+
+                <div class="col-5">
+                    <label for="upfile" class="form-label">Upload File</label>
+                    <input type="file" name="upfile" class="form-control" id="upfile" required="">
+                    <div class="invalid-feedback">
+                        Please select a valid PDF file.
+                    </div>
+                    <hr class="my-4">
+                    <button class="w-100 btn btn-primary btn-lg" type="submit">Process file</button>
+                </div>
+            </form>
+
+        </div>
+    </main>
+</div>
+<div class="container">
+    <footer class="py-3 my-4">
+        <p class="text-center text-muted">
+            This service is tightly coupled to the specific PDF format in which the BPD provides the journal. It will not work with other PDFs or other files.<br>See an Example
+            <a href="https://boston-police-journal-parser.herokuapp.com/tests/pdfs/district_journal_arrests_public.pdf">
+                Boston Police Department Public Journal
+            </a>.
+        </p>
+        <p class="text-center text-muted">This code is hosted on <a href="https://github.com/balsama/boston-police-journal-parser">GitHub</a>. Please report any issues in the <a href="https://github.com/balsama/boston-police-journal-parser/issues">GitHub Issue Queue</a>.</p>
+    </footer>
+</div>
+</body>
+</html>
