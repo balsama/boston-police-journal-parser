@@ -42,9 +42,6 @@ class Report
         else {
             return;
         }
-        if (!isset($indexes)) {
-            $foo = 21;
-        }
 
         $this->complaintNumber = (string) trim($this->parts[$indexes[1]]);
         $this->reportDateTime = date("Y-m-d H:i:s", strtotime((string) trim($this->parts[$indexes[0]])));
