@@ -10,7 +10,6 @@ class Report
     public string $reportDateTime;
     public string $occuranceDateTime;
     public Officer $officer;
-    public string $officerEmployeeNumber;
     public string $location;
     public Incident $incident;
     public array $arrestees;
