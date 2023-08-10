@@ -3,7 +3,7 @@ include_once __DIR__ . '/../vendor/autoload.php';
 
 use GuzzleHttp\Client;
 
-$url = "https://bpdnews.com/"; // Use ?offset=<timestamp> to start from some time in the past.
+$url = "https://bpdnews.com/?offset=1591993076270"; // Use ?offset=<timestamp> to start from some time in the past.
 scrapePdfsFromUrl($url);
 
 function scrapePdfsFromUrl($url, $totalCount = 0)
@@ -32,6 +32,9 @@ function scrapePdfsFromUrl($url, $totalCount = 0)
     $count = 0;
     foreach ($pdfLinks as $pdfLink) {
         if ($pdfLink === '_blank') {
+            continue;
+        }
+        if (!str_starts_with($pdfLink, '/')) {
             continue;
         }
         $filenameParts = explode('/', $pdfLink);
