@@ -23,7 +23,6 @@ class ReportTest extends \PHPUnit\Framework\TestCase
     public function testIncidentNumber()
     {
         $report = new Report($this->exampleReportText);
-        $foo = 21;
         $this->assertEquals("INCIDENTNUMBER", $report->INCIDENTNUMBER);
     }
 
