@@ -58,9 +58,9 @@ class Report
         $incidentTypeFullText = self::UNKNOWN;
         foreach ($this->parts as $index => $part) {
             if ($part === 'Nature of Incident') {
-                $incidentIndex = $index + 2;
+                $incidentIndex = $index + 1;
                 $incidentTypeFullText = (string) trim($this->parts[$incidentIndex]);
-                continue;
+                break;
             }
         }
 
@@ -84,7 +84,6 @@ class Report
         else {
             return;
         }
-
         $this->complaintNumber = (string) trim($this->parts[$indexes[1]]);
         $this->reportDateTime = date("Y-m-d H:i:s", strtotime((string) trim($this->parts[$indexes[0]])));
         $this->occuranceDateTime = date("Y-m-d H:i:s", strtotime((string) trim($this->parts[$indexes[2]])));
