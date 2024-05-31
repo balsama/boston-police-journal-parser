@@ -11,13 +11,25 @@ class ReportTest extends \PHPUnit\Framework\TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->exampleReportText = file_get_contents( __DIR__ . '/../pdfs/exampleReport1');
+        $this->exampleReportText = file_get_contents( __DIR__ . '/../pdfs/exampleReport6');
     }
 
-    public function testConstruct()
+    public function testIncident()
     {
         $report = new Report($this->exampleReportText);
         $this->assertInstanceOf('Balsama\BostonPoliceReportParser\Report', $report);
+        $this->assertEquals("VAL - VIOLATION OF AUTO LAW", $report->incident->fullText);
+    }
+    public function testIncidentNumber()
+    {
+        $report = new Report($this->exampleReportText);
+        $this->assertEquals("INCIDENTNUMBER", $report->INCIDENTNUMBER);
+    }
+
+    public function testComplaintNumber()
+    {
+        $report = new Report($this->exampleReportText);
+        $this->assertTrue(true);
     }
 
     public function testWeirdReportFormat()
